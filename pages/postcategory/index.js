@@ -20,7 +20,7 @@ const Main = () => {
       <Navbar />
       <Container className="mt-0 pt-0">
         <h1 className="mt-[-30px] mb-3 text-3xl font-semibold tracking-tight text-center lg:leading-snug text-brand-primary lg:text-4xl dark:text-white capitalize">
-          {id}
+          {/* {posts && id} */}
         </h1>
         <h2 className="mt-2 mb-10 text-base font-normal tracking-tight text-center lg:leading-snug text-brand-primary lg:text-2xl dark:text-white">
           {posts.length}
