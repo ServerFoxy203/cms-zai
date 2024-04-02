@@ -24,7 +24,7 @@ dayjs.extend(utc);
 const Post = () => {
 
   return (
-    <div>Maintenance, please contact me. I'm lonely</div>
+    <div>Maintenance, please contact me. I am lonely</div>
   )
 
 
