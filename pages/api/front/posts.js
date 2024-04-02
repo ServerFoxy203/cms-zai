@@ -2,7 +2,21 @@ import Post from "../../../models/Post";
 import dbConnect from "../../../lib/db-connect";
 import User from "../../../models/User";
 
-export default async function postsCategories(req, res) {
+export default async function posts(req, res) {
+  try {
+    await dbConnect();
+    const posts = await Post.find();
+    if (!posts) {
+      return res.status(400).end("Cannot find posts");
+    }
+    return res.status(200).send(posts);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).end(error.message);
+  }
+}
+
+export async function postsCategories2222(req, res) {
   try {
     await dbConnect();
     const posts = await Post.aggregate([
@@ -18,12 +32,12 @@ export default async function postsCategories(req, res) {
         $unwind: "$author",
       },
       {
-            $lookup: {
-                from: "postcategories",
-                localField: "category_id",
-                foreignField: "_id",
-                as: "category"
-            }
+        $lookup: {
+          from: "postcategories",
+          localField: "category_id",
+          foreignField: "_id",
+          as: "category"
+        }
       },
       {
         $unwind: "$category",
@@ -36,12 +50,12 @@ export default async function postsCategories(req, res) {
       },
       {
         $project: {
-            _id: 1,
-            title: 1,
-            created: 1,
-            author: 1,
-            category: 1,
-            thumbnail_url: 1,
+          _id: 1,
+          title: 1,
+          created: 1,
+          author: 1,
+          category: 1,
+          thumbnail_url: 1,
         }
       }
     ]);

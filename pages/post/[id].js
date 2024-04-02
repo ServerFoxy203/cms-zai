@@ -1,7 +1,8 @@
 import Container from "../../components/front/container";
 import CategoryLabel from "../../components/front/catogory";
 import Link from "next/link";
-import { getPostsIDs, getPost } from "../../lib/front/load-posts_build";
+// import { getPostsIDs, getPost } from "../../lib/front/load-posts_build";
+import { getPostsIDs, getPost } from "../../lib/front/get-data";
 import parse from "html-react-parser";
 import Navbar from "../../components/front/navbar";
 import Footer from "../../components/front/footer";
@@ -287,12 +288,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  console.log("STATIC PROPS 2", params)
   const res = await getPost(params);
   const comments = await getPostComments(params);
   const reactionCategories = await getReactionCategories();
   const postReactions = await getPostReactions(params);
   const userReacted = await getUserReactions(params);
-  
+
   return {
     props: { res, comments, reactionCategories, postReactions, userReacted },
   };

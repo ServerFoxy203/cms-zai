@@ -2,13 +2,14 @@ import Footer from "../../components/front/footer";
 import Navbar from "../../components/front/navbar";
 import PostList from "../../components/front/postlist";
 import Container from "../../components/front/container";
-import { getPosts } from "../../lib/front/load-posts_build";
+// import { getPosts } from "../../lib/front/load-posts_build";
+import { getPosts } from "../../lib/front/get-data";
 import { useRouter } from "next/router";
 
 const Main = (props) => {
   const router = useRouter();
   const { id } = router.query;
-  const posts = props.posts.filter((el) => {
+  const posts = props.posts?.filter((el) => {
     return el.category == id;
   });
 
@@ -25,7 +26,7 @@ const Main = (props) => {
         </h2>
 
         <div className="grid gap-10 lg:gap-10 md:grid-cols-2 ">
-          {posts.slice(0, 2).map((post) => (
+          {posts && posts.slice(0, 2).map((post) => (
             <PostList
               key={post._id}
               post={post}
@@ -35,7 +36,7 @@ const Main = (props) => {
           ))}
         </div>
         <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 ">
-          {posts.slice(2).map((post) => (
+          {posts && posts.slice(2).map((post) => (
             <PostList
               key={post._id}
               post={post}
@@ -51,6 +52,7 @@ const Main = (props) => {
 };
 
 export async function getStaticProps() {
+  console.log("STATIC PROPS 3")
   const posts = await getPosts();
 
   return {

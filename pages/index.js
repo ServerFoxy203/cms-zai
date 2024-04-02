@@ -2,25 +2,34 @@ import Footer from "../components/front/footer";
 import Navbar from "../components/front/navbar";
 import PostList from "../components/front/postlist";
 import Container from "../components/front/container";
-import { getPosts, getPublicContent } from "../lib/front/load-posts_build";
+// import { getPosts, getPublicContent } from "../lib/front/load-posts_build";
+// import { getPosts, getPublicContent } from "../lib/front/get-data";
+import { useEffect, useState } from "react";
 
-const Main = (props) => {
-  let posts = []
-  console.log('sitepuboic content', props.publicContent)
-  if (props.publicContent.front_page_posts_ids != []) {
-  posts = props.publicContent.front_page_posts_ids.map((e) => {
-    return props.posts.find((p) => p._id == e);
-  })} else {
-    posts = props.posts;
-    console.log("all posts", posts)
+const Main = () => {
+  const [posts, setPosts] = useState(null);
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const result = await fetch('/api/front/front_page_posts');
+      if (result.status === 200) {
+        const posts = await result.json();
+        setPosts(posts);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-  
+
   return (
     <div>
       <Navbar />
       <Container>
         <div className="grid gap-10 lg:gap-10 md:grid-cols-2 ">
-          {posts.slice(0, 2).map((post) => (
+          {posts && posts.slice(0, 2).map((post) => (
             <PostList
               key={post._id}
               post={post}
@@ -30,7 +39,7 @@ const Main = (props) => {
           ))}
         </div>
         <div className="grid gap-10 mt-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 ">
-          {posts.slice(2).map((post) => (
+          {posts && posts.slice(2).map((post) => (
             <PostList
               key={post._id}
               post={post}
@@ -45,12 +54,14 @@ const Main = (props) => {
   );
 };
 
-export async function getStaticProps() {
-  const posts = await getPosts();
-  const publicContent = await getPublicContent();
-  return {
-    props: { posts, publicContent },
-  };
-}
+// export async function getStaticProps() {
+//   const posts = await getPosts();
+//   const publicContent = await getPublicContent();
+//   console.log("STATIC PROPS 1")
+//   // console.log(posts, publicContent)
+//   return {
+//     props: { posts, publicContent },
+//   };
+// }
 
 export default Main;
