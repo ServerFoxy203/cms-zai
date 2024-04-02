@@ -21,7 +21,13 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
-const Post = (props) => {
+const Post = () => {
+
+  return (
+    <div>Maintenance, please contact me. I'm lonely</div>
+  )
+
+
   const post = props.res[0];
   const comments = props.comments;
   // const postReactions = props.postReactions;
@@ -274,28 +280,28 @@ const Post = (props) => {
 
 export default Post;
 
-export async function getStaticPaths() {
-  const allPosts = await getPostsIDs();
+// export async function getStaticPaths() {
+//   const allPosts = await getPostsIDs();
 
-  const paths = allPosts.map((post) => ({
-    params: { id: post._id.toString() },
-  }));
+//   const paths = allPosts.map((post) => ({
+//     params: { id: post._id.toString() },
+//   }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps({ params }) {
-  console.log("STATIC PROPS 2", params)
-  const res = await getPost(params);
-  const comments = await getPostComments(params);
-  const reactionCategories = await getReactionCategories();
-  const postReactions = await getPostReactions(params);
-  const userReacted = await getUserReactions(params);
+// export async function getStaticProps({ params }) {
+//   console.log("STATIC PROPS 2", params)
+//   const res = await getPost(params);
+//   const comments = await getPostComments(params);
+//   const reactionCategories = await getReactionCategories();
+//   const postReactions = await getPostReactions(params);
+//   const userReacted = await getUserReactions(params);
 
-  return {
-    props: { res, comments, reactionCategories, postReactions, userReacted },
-  };
-}
+//   return {
+//     props: { res, comments, reactionCategories, postReactions, userReacted },
+//   };
+// }

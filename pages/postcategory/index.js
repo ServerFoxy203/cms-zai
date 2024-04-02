@@ -6,12 +6,14 @@ import Container from "../../components/front/container";
 import { getPosts } from "../../lib/front/get-data";
 import { useRouter } from "next/router";
 
-const Main = (props) => {
-  const router = useRouter();
-  const { id } = router.query;
-  const posts = props.posts?.filter((el) => {
-    return el.category == id;
-  });
+const Main = () => {
+  // const router = useRouter();
+  // const { id } = router.query;
+  // const posts = props.posts?.filter((el) => {
+  //   return el.category == id;
+  // });
+
+  const posts = [];
 
   return (
     <div>
@@ -51,13 +53,13 @@ const Main = (props) => {
   );
 };
 
-export async function getStaticProps() {
-  console.log("STATIC PROPS 3")
-  const posts = await getPosts();
+// export async function getStaticProps() {
+//   console.log("STATIC PROPS 3")
+//   const posts = await getPosts();
 
-  return {
-    props: { posts },
-  };
-}
+//   return {
+//     props: { posts },
+//   };
+// }
 
 export default Main;
