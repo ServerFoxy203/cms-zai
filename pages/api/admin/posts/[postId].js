@@ -10,9 +10,9 @@ import mongoose from "mongoose";
 export default async function post(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const { postId } = req.query;
     if (!mongoose.isValidObjectId(postId)) {
       return res.status(400).end("Post id is not a valid MongoDB ObjectId");

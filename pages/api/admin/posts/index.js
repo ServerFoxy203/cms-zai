@@ -8,9 +8,9 @@ import { isAdminAuthenticated } from "../../../../lib/auth";
 export default async function posts(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const populateData = [
       ["user_id", User],
       ["category_id", PostCategory],

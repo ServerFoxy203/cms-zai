@@ -9,9 +9,9 @@ import ReactionCategory from "../../../../models/ReactionCategory";
 export default async function reaction(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const { reactionId } = req.query;
     if (!mongoose.isValidObjectId(reactionId)) {
       return res.status(400).end("Reaction id is not a valid MongoDB ObjectId");

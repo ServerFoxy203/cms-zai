@@ -8,9 +8,9 @@ import Post from "../../../../models/Post";
 export default async function comment(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const { commentId } = req.query;
     if (!mongoose.isValidObjectId(commentId)) {
       return res.status(400).end("Comment id is not a valid MongoDB ObjectId");

@@ -7,9 +7,9 @@ import User from "../../../../models/User";
 export default async function image(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const { imageId } = req.query;
     if (!mongoose.isValidObjectId(imageId)) {
       return res.status(400).end("Image id is not a valid MongoDB ObjectId");

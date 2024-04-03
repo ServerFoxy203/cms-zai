@@ -7,9 +7,9 @@ import mongoose from "mongoose";
 export default async function publicContent(req, res) {
     try {
       await dbConnect();
-      if (!(await isAdminAuthenticated(req, res))) {
-        return res.status(401).end("Unauthorized");
-      }
+      // if (!(await isAdminAuthenticated(req, res))) {
+      //   return res.status(401).end("Unauthorized");
+      // }
       const configs = await ConfigEntry.find();
       if (configs.length) {
         const parsed = JSON.parse(configs[0].body);

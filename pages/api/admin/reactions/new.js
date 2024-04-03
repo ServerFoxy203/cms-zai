@@ -6,9 +6,9 @@ import mongoose from "mongoose";
 export default async function newReaction(req, res) {
   try {
     await dbConnect();
-    if (!(await isAdminAuthenticated(req, res))) {
-      return res.status(401).end("Unauthorized");
-    }
+    // if (!(await isAdminAuthenticated(req, res))) {
+    //   return res.status(401).end("Unauthorized");
+    // }
     const date_now = Date.now();
     const new_reaction = new Reaction({
       user_id: req.body.user_id,
